@@ -153,7 +153,8 @@
       overflow: hidden;
       clip: rect(0 0 0 0);
     }
-    .finish label:focus-within { outline: 2px solid var(--steady); outline-offset: 8px; }
+    .finish label:focus-within { outline: none; }
+    .finish label:focus-within .ask { outline: 2px solid var(--steady); outline-offset: 6px; }
     .track {
       display: block;
       height: 2px;
@@ -306,5 +307,14 @@
   <footer>
     <p>People from this room are on duty tonight.</p>
   </footer>
+  <script>
+    const dose = document.querySelector(".finish input");
+    const done = document.querySelector(".done");
+    dose.addEventListener("change", () => {
+      if (!dose.checked) return;
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      done.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    });
+  </script>
 </body>
 </html>
