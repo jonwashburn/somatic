@@ -55,6 +55,23 @@
     .page { container: page / inline-size; }
     p { margin: 0.75rem 0; }
     h1 { font-size: 2rem; line-height: 1.15; font-weight: 700; margin: 0 0 0.75rem; max-width: 62ch; }
+    h2 { font-size: 1.35rem; line-height: 1.2; font-weight: 700; margin: 0 0 0.75rem; }
+    .who {
+      display: grid;
+      grid-template-columns: 7.5rem minmax(0, 1fr);
+      gap: 1rem 1.25rem;
+      align-items: start;
+      max-width: 62ch;
+      margin: 1.25rem 0 0;
+    }
+    .who img { width: 100%; height: auto; display: block; }
+    .who figcaption { margin: 0; font-style: normal; }
+    .who p { margin: 0 0 0.75rem; }
+    .record { max-width: 62ch; margin: 4.5rem 0; }
+    .record a { text-underline-offset: 0.18em; }
+    .sources { margin: 1rem 0 0; padding: 0; list-style: none; }
+    .sources li { margin: 0; }
+    .sources a { display: flex; align-items: center; min-height: 48px; }
     a { color: var(--word); }
     :focus-visible { outline: 3px solid var(--word); outline-offset: 3px; }
     .skip {
@@ -201,6 +218,9 @@
     html.js .js-only { display: block; }
     html.js .noscript-mail { display: none; }
     .colophon { margin-top: 4.5rem; max-width: 62ch; }
+    @container page (max-width: 28rem) {
+      .who { grid-template-columns: 8rem minmax(0, 1fr); }
+    }
     @container page (min-width: 48rem) {
       .poles {
         display: grid;
@@ -239,7 +259,13 @@
     <main>
       <section>
         <h1>A protective act can finish after the job cuts it off.</h1>
-        <p>Matt Chellew, MD teaches that, in person, to people who work emergencies.</p>
+        <figure class="who">
+          <img src="matt.jpg" width="900" height="867" alt="Matt Chellew, MD">
+          <figcaption>
+            <p>Matt Chellew, MD teaches that, in person, to people who work emergencies.</p>
+            <p>He has spent more than twenty years in high-acuity emergency departments, urban and rural, in Canada and the United States.</p>
+          </figcaption>
+        </figure>
         <p>If you are in danger, call or text 988 in the United States, or the local emergency number. Stay with a person.</p>
       </section>
       <section class="places">
@@ -292,6 +318,21 @@
           </section>
         </div>
       </div>
+      <section class="record" id="record">
+        <h2>Already measured</h2>
+        <p>In <a href="https://arxiv.org/abs/2111.04441">emergency medicine</a>, <a href="https://arxiv.org/abs/2011.06457">disaster response</a>, and <a href="https://arxiv.org/abs/1801.09165">combat-related PTSD</a>, the symptom is already in <a href="https://arxiv.org/abs/1911.13213">heart rate</a>, in <a href="https://arxiv.org/abs/2109.14743">hyperarousal between sessions</a>, and in <a href="https://arxiv.org/abs/2011.06457">courses measured over years</a>. Feeling an emotion recruits <a href="https://arxiv.org/abs/2411.08973">somatosensory and interoceptive cortex</a>, and a body-attending strategy uses <a href="https://arxiv.org/abs/2305.16241">a different neural route from reappraisal</a>. <a href="https://arxiv.org/abs/2507.10175">Slow breathing</a> and <a href="https://arxiv.org/abs/1801.09165">trained self-regulation</a> move that physiology. <a href="https://arxiv.org/abs/2506.19524">Healthcare workers, asked directly, ask for an embodied practice rather than another app.</a></p>
+        <ul class="sources">
+          <li><a href="https://arxiv.org/abs/2111.04441">Frontline physicians, PCL-5, 1,017 complete responses</a></li>
+          <li><a href="https://arxiv.org/abs/2011.06457">World Trade Center responders, symptoms followed for up to 7 years</a></li>
+          <li><a href="https://arxiv.org/abs/1911.13213">Firefighter trainees, stress separated in heart-rate variability</a></li>
+          <li><a href="https://arxiv.org/abs/2109.14743">99 veterans, hyperarousal from a watch</a></li>
+          <li><a href="https://arxiv.org/abs/2411.08973">Body-sensation maps and somatosensory, motor, and insular cortex</a></li>
+          <li><a href="https://arxiv.org/abs/2305.16241">Acceptance and reappraisal, a different neural route</a></li>
+          <li><a href="https://arxiv.org/abs/2507.10175">Equal inhale and exhale, stress EEG down in one session</a></li>
+          <li><a href="https://arxiv.org/abs/1801.09165">Combat PTSD, amygdala training, 20 versus 11, CAPS fell</a></li>
+          <li><a href="https://arxiv.org/abs/2506.19524">26 healthcare professionals, embodied and collective practice</a></li>
+        </ul>
+      </section>
       <section id="room">
         <p>If you have people and a slot, send the facts below. He answers whether he can take that hour. This hour does not certify anyone. Their own clinicians keep the care.</p>
         <form id="request-form">
