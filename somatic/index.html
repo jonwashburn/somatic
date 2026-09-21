@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matt Chellew, MD. The body stays in the last room</title>
+  <meta name="description" content="A talk for healthcare workers, first responders, and military units about the protective actions a shift interrupts, and how to let a tolerable piece finish between calls.">
+  <link rel="canonical" href="https://somatic.alldogs.wtf/somatic/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Matt Chellew, MD. The body stays in the last room">
+  <meta property="og:description" content="A talk for healthcare workers, first responders, and military units. One hour. One dose they can use between calls tonight.">
+  <meta property="og:url" content="https://somatic.alldogs.wtf/somatic/">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,560|commissioner:500">
+  <style>
+    /* Ground: the room you are in. Word: speech. Held: the act still waiting. Steady: the return. */
+    :root {
+      --ground: oklch(0.17 0.025 230);
+      --word: oklch(0.95 0.012 95);
+      --quiet: oklch(0.78 0.02 230);
+      --held: oklch(0.74 0.14 40);
+      --steady: oklch(0.80 0.06 190);
+      --return: oklch(0.22 0.035 190);
+      --serif: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      --sans: Commissioner, "Avenir Next", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--ground); color-scheme: dark; }
+    body {
+      margin: 0;
+      background: var(--ground);
+      color: var(--word);
+      font: 1.125rem/1.55 var(--serif);
+      text-wrap: pretty;
+    }
+    a { color: inherit; }
+    .skip {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      background: var(--word);
+      color: var(--ground);
+      padding: 0.6rem 0.8rem;
+    }
+    .skip:focus { top: 1rem; z-index: 3; }
+    .inhale, .along { height: 2px; border: 0; }
+    .inhale {
+      width: min(34rem, 72vw);
+      margin: 0;
+      background: var(--steady);
+      transform-origin: left center;
+      animation: inhale 4.2s cubic-bezier(.16, .7, .2, 1) both;
+    }
+    @keyframes inhale {
+      from { transform: scaleX(0.06); }
+      to { transform: scaleX(1); }
+    }
+    .along {
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 18vw;
+      background: var(--held);
+    }
+    @supports (animation-timeline: scroll()) {
+      .along {
+        width: 100%;
+        transform: scaleX(0.12);
+        transform-origin: left center;
+        animation: along linear both;
+        animation-timeline: scroll(root block);
+      }
+      @keyframes along {
+        0% { transform: scaleX(0.12); background: var(--held); }
+        55% { transform: scaleX(0.55); background: var(--held); }
+        100% { transform: scaleX(1); background: var(--steady); }
+      }
+    }
+    header, main, footer { width: min(38rem, calc(100% - 2.5rem)); margin-left: max(1.25rem, 8vw); }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem 0 0;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--quiet);
+    }
+    .arrive {
+      min-height: calc(100svh - 5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 12vh;
+      animation: speak 1s ease 3.1s both;
+    }
+    @keyframes speak {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    h1 {
+      font-weight: 560;
+      font-size: clamp(2.5rem, 12cqi, 4.4rem);
+      letter-spacing: -0.035em;
+      line-height: 1.02;
+      margin: 0 0 1.1rem;
+      text-wrap: balance;
+    }
+    .arrive { container-type: inline-size; }
+    .arrive p { margin: 0; max-width: 28rem; color: var(--quiet); font-size: 1.2rem; }
+    section { padding: 4.5rem 0; }
+    .kicker {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--steady);
+      margin: 0 0 0.7rem;
+    }
+    .place { margin: 0 0 1.6rem; }
+    .place h2 {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--quiet);
+      margin: 0 0 0.35rem;
+    }
+    p { margin: 0.8rem 0; }
+    .held { color: var(--held); }
+    .return {
+      width: 100%;
+      margin: 0;
+      background: var(--return);
+      padding: 7rem max(1.25rem, 8vw);
+    }
+    .return .inner { width: min(38rem, 100%); }
+    .return p { font-size: 1.35rem; line-height: 1.45; }
+    .finish label {
+      display: block;
+      margin-top: 1.6rem;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .finish input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .finish label:focus-within { outline: 2px solid var(--steady); outline-offset: 8px; }
+    .track {
+      display: block;
+      height: 2px;
+      background: oklch(0.32 0.02 230);
+      margin: 0.2rem 0 0.8rem;
+    }
+    .track i {
+      display: block;
+      height: 2px;
+      width: 14%;
+      background: var(--held);
+      transition: width 2.4s cubic-bezier(.16, .8, .2, 1), background 2.4s;
+    }
+    .ask {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid var(--held);
+    }
+    .finish:has(input:checked) .track i { width: 100%; background: var(--steady); }
+    .finish:has(input:checked) .ask { border-bottom-color: var(--steady); color: var(--steady); }
+    .done { display: none; margin-top: 1.2rem; }
+    .finish:has(input:checked) .done { display: block; }
+    .hour { border-top: 1px solid oklch(0.32 0.02 230); }
+    blockquote {
+      margin: 1.2rem 0;
+      padding: 0;
+      font-size: 1.15rem;
+      line-height: 1.45;
+    }
+    .mail {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      text-decoration: none;
+      border-bottom: 1px solid var(--word);
+    }
+    .mail:hover, .mail:focus-visible { color: var(--steady); border-bottom-color: var(--steady); }
+    .fine { color: var(--quiet); font-size: 0.95rem; }
+    footer {
+      padding: 2rem 0 4rem;
+      color: var(--quiet);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 700px) {
+      header, main, footer, .return { margin-left: 0; width: 100%; }
+      header, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .return { padding: 4.5rem 1.25rem; }
+      h1 { font-size: clamp(2.15rem, 11vw, 3rem); }
+      .arrive { min-height: calc(100svh - 4.5rem); padding-bottom: 8vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .arrive { opacity: 1; }
+      .inhale { transform: none; width: min(12rem, 40vw); }
+      .along { width: 18vw; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#hour">Skip to the hour</a>
+  <div class="along" aria-hidden="true"></div>
+  <header>
+    <p>Matt Chellew, MD</p>
+    <p>Emergency medicine</p>
+  </header>
+  <div class="inhale" aria-hidden="true"></div>
+  <main>
+    <section class="arrive">
+      <h1>They clock out and the last room comes with them.</h1>
+      <p>It's an hour on letting a small piece of that finish before the drive home.</p>
+    </section>
+
+    <section>
+      <p class="kicker">Who it is for</p>
+      <p>A department chief, a training officer, or a conference chair can put this hour in a room. The person on the night shift will feel whether it is real.</p>
+      <div class="place">
+        <h2>The bay</h2>
+        <p>The bay doesn't stay empty. A tone pulls someone up from a chair that is still warm. At the bedside a shove starts, or a cry, and the work in front of them means it cannot finish. The patient is gone and the note is filed. The shoulders have not come down.</p>
+      </div>
+      <div class="place">
+        <h2>The rig</h2>
+        <p>On a rig, that tone cuts a sentence in half. The shove has started before the wheels stop. Then the person is needed for the patient in front of them, and the shove does not get an ending. On the drive back the hands stay tight on the wheel.</p>
+      </div>
+      <div class="place">
+        <h2>The watch</h2>
+        <p>In a military unit, training makes the protection fast, and a watch can order it to stop. Afterward the room is quiet. The body stays ready anyway.</p>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">What stays</p>
+      <p>The body starts a protection it does not get to finish. A flinch, a run, a shove, a cry, a collapse. The tone has already put the person in the bay, or sent them out to the rig, and the shift goes on to the next task. On the drive home the body will not power down. It is <span class="held">still in the last room</span>.</p>
+      <p>From the inside, that leftover sequence is burnout, numbness, rage, and the startle that shows up at 3 a.m.</p>
+    </section>
+  </main>
+
+  <section class="return">
+    <div class="inner">
+      <p class="kicker">The return</p>
+      <p>Feet on the floor, and the back given to the chair. If the room has a window, it can go unsearched. The breath is allowed to leave, all the way out, including the pause at the end of it.</p>
+      <p>A person comes back to this after a small piece of the action finishes.</p>
+    </div>
+  </section>
+
+  <main>
+    <section>
+      <p class="kicker">A typical tone</p>
+      <p>A medic hears it, and the right foot loads to push the door of the rig. On scene the work is hands and kneeling, so the push never comes. Later, in a chair, that foot is still loaded.</p>
+      <div class="finish">
+        <label>
+          <input type="checkbox">
+          <span class="track" aria-hidden="true"><i></i></span>
+          <span class="ask">Let a few centimeters finish</span>
+        </label>
+        <div aria-live="polite">
+          <p class="done">They let it press into the floor, only the beginning of the push, and stop while the seat is still easy to feel. The chair takes the weight. The breath leaves. The shift is still on. If the tone sounds, they go.</p>
+        </div>
+      </div>
+      <p>Completion is a small piece of the ending the shift blocked, done on purpose. The person picks a size they can stand, lets that piece happen, and stops. Attention comes back to a steady contact. The dose stays small enough that they can still feel the chair.</p>
+      <p>The sequence is already in the body. Between calls, people practice the size and the return. They are still on the job when they stand up.</p>
+      <p>A person can pass it on in a few words. A protection got started. Let a small piece of the ending happen. Come back to the chair.</p>
+    </section>
+
+    <section class="hour" id="hour">
+      <p class="kicker">The hour</p>
+      <p>They leave able to do one thing tonight.</p>
+      <p>In a chair, they find the place still running the last call: a foot, or a jaw. They let a small piece of its motion finish, and they stop while the chair is clearly under them.</p>
+      <p>They do it once, seated, before anyone leaves. They can use that same dose between calls tonight, or before sleep.</p>
+    </section>
+
+    <section>
+      <p class="kicker">Matt Chellew, MD</p>
+      <p>Matt Chellew, MD, is a physician in emergency medicine who went through severe burnout and found somatic experiencing through his own body. He learned it because he needed it. He speaks for an hour on the mechanism, to people who go back on shift.</p>
+    </section>
+
+    <section id="book">
+      <p class="kicker">Book the hour</p>
+      <p>Ask for a talk for a department, or a conference session.</p>
+      <blockquote>We would like to book Matt Chellew, MD, for a one-hour talk for our department on how to let a small unfinished protective action finish between calls.</blockquote>
+      <p><a class="mail" href="mailto:matt@thrivingbeyondburnout.com?subject=A%20talk%20for%20our%20department&amp;body=We%20would%20like%20to%20book%20Matt%20Chellew%2C%20MD%2C%20for%20a%20one-hour%20talk%20for%20our%20department%20on%20how%20to%20let%20a%20small%20unfinished%20protective%20action%20finish%20between%20calls.">Write that request</a></p>
+      <p class="fine">The hour is a talk. Attendance confers no certificate. Official somatic experiencing training is a separate program.</p>
+    </section>
+  </main>
+  <footer>
+    <p>People from this room are on duty tonight.</p>
+  </footer>
+</body>
+</html>
